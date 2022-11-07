@@ -1,14 +1,13 @@
-const http = require('http');
+require('dotenv').config();
+const express = require('express');
+const app = express();
 
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello NodeJS!');
+app.get("/", (request, response) => {
+  response.send('Hello World!');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.get("/user", (request, response) => {
+  response.send({ name: process.env.NAME, age: process.env.AGE });
 });
+
+module.exports = app;
